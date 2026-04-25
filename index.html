@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>SOLO SYSTEM — STIN Preparation + Bulking Protocol</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan:    #00f5ff;
+      --blue:    #3b82f6;
+      --purple:  #8b5cf6;
+      --green:   #34d399;
+      --yellow:  #fbbf24;
+      --red:     #f87171;
+      --orange:  #fb923c;
+      --bg-deep: #020814;
+      --bg-card: rgba(6,12,26,0.85);
+      --border:  rgba(0,245,255,0.2);
+      --text:    #d4eeff;
+      --text-dim:#6b8aaa;
+      --glow-c:  0 0 8px #00f5ff88, 0 0 20px #00f5ff33;
+      --glow-p:  0 0 8px #8b5cf688, 0 0 20px #8b5cf633;
+      --glow-g:  0 0 8px #34d39988, 0 0 20px #34d39933;
+      --glow-o:  0 0 8px #fb923c88, 0 0 20px #fb923c33;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg-deep);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(0,80,120,0.15), transparent),
+        radial-gradient(ellipse 60% 60% at 90% 80%, rgba(80,20,140,0.12), transparent);
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--text);
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content:'';
+      position:fixed; inset:0; pointer-events:none; z-index:9999;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+    }
+
+    /* ══════════════════════════════════════
+       LOGIN / REGISTER OVERLAY
+    ══════════════════════════════════════ */
+    #authOverlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(2,8,20,0.97);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+
+    .auth-box {
+      background: rgba(4,10,22,0.9);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 60px rgba(0,245,255,0.06), 0 0 120px rgba(0,0,0,0.8);
+      animation: fadeInUp 0.4s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:none; }
+    }
+
+    .auth-logo {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    .auth-logo h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.7rem;
+      background: linear-gradient(120deg, var(--cyan), #a8f8ff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      letter-spacing: 2px;
+    }
+    .auth-logo p {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 0.3rem;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .auth-logo .auth-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: rgba(0,0,0,0.4);
+      border-radius: 2rem;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+    }
+    .auth-tab {
+      flex: 1; text-align: center;
+      padding: 0.5rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      transition: 0.2s;
+      border: none;
+      background: none;
+    }
+    .auth-tab.active {
+      background: rgba(0,245,255,0.12);
+      color: var(--cyan);
+      box-shadow: var(--glow-c);
+    }
+
+    .auth-form { display: none; flex-direction: column; gap: 1rem; }
+    .auth-form.active { display: flex; }
+
+    .auth-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .auth-field label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .auth-input-wrap {
+      position: relative;
+    }
+    .auth-input-wrap i {
+      position: absolute;
+      left: 1rem; top: 50%; transform: translateY(-50%);
+      color: var(--text-dim); font-size: 0.85rem;
+      pointer-events: none;
+    }
+    .auth-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,245,255,0.2);
+      color: var(--text);
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      border-radius: 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .auth-input:focus {
+      border-color: var(--cyan);
+      box-shadow: var(--glow-c);
+      background: rgba(0,245,255,0.05);
+    }
+    .auth-input.error-field {
+      border-color: var(--red);
+      box-shadow: 0 0 8px rgba(248,113,113,0.3);
+    }
+
+    .auth-submit {
+      background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(59,130,246,0.15));
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      padding: 0.75rem;
+      border-radius: 2rem;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.3rem;
+    }
+    .auth-submit:hover {
+      background: rgba(0,245,255,0.2);
+      box-shadow: var(--glow-c);
+      transform: translateY(-1px);
+    }
+    .auth-submit:active { transform: scale(0.98); }
+
+    .auth-error {
+      background: rgba(248,113,113,0.1);
+      border: 1px solid rgba(248,113,113,0.3);
+      color: #fca5a5;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem;
+      display: none;
+    }
+    .auth-error.show { display: block; }
+
+    .auth-user-list {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-align: center;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* Password toggle */
+    .pw-toggle {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--text-dim); cursor: pointer;
+      font-size: 0.85rem; padding: 0;
+    }
+    .pw-toggle:hover { color: var(--cyan); }
+
+    /* User info in header */
+    .user-chip {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,245,255,0.08);
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 2rem;
+      padding: 0.35rem 0.9rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .user-chip:hover {
+      background: rgba(0,245,255,0.15);
+      box-shadow: var(--glow-c);
+    }
+    .user-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #000;
+    }
+
+    /* ══════════════════════════════════════
+       MAIN APP
+    ══════════════════════════════════════ */
+    .system-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: rgba(4,10,22,0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 60px rgba(0,245,255,0.04), 0 30px 60px rgba(0,0,0,0.6);
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    h1,h2,h3,.mono { font-family: 'Orbitron', monospace; }
+    .mono-sm { font-family: 'Share Tech Mono', monospace; }
+
+    .neon-text {
+      background: linear-gradient(120deg, var(--cyan), #a8f8ff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .neon-green {
+      background: linear-gradient(120deg, var(--green), #a7f3d0);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .neon-orange {
+      background: linear-gradient(120deg, var(--orange), #fed7aa);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .header-system {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.2rem; margin-bottom: 2rem;
+      gap: 1rem;
+    }
+    .title-section h1 { font-size: 1.9rem; letter-spacing: 2px; }
+    .title-section p  { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.2rem; }
+
+    .header-badges { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; }
+    .badge-pill {
+      padding: 0.4rem 0.9rem; border-radius: 2rem;
+      font-size: 0.75rem; font-family: 'Share Tech Mono', monospace;
+      font-weight: 600; border: 1px solid;
+    }
+    .badge-week  { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,255,0.07); }
+    .badge-bmi   { border-color: var(--orange); color: var(--orange); background: rgba(251,146,60,0.1); }
+    .badge-goal  { border-color: var(--green); color: var(--green); background: rgba(52,211,153,0.08); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 1.3rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: 1.3rem;
+      padding: 1.1rem 1.3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .stat-card:hover { border-color: rgba(0,245,255,0.4); box-shadow: var(--glow-c); }
+
+    .card-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.4rem; font-family: 'Share Tech Mono', monospace; }
+    .rank-row   { display: flex; justify-content: space-between; align-items: center; }
+    .rank-badge { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 1rem; background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.3); }
+
+    .xp-bar-bg { background: rgba(255,255,255,0.07); border-radius: 1rem; height: 10px; margin: 0.7rem 0; overflow: hidden; }
+    .xp-fill   { width:0%; height:100%; background: linear-gradient(90deg, var(--cyan), var(--blue)); border-radius: 1rem; transition: width 0.5s cubic-bezier(.4,0,.2,1); box-shadow: 0 0 10px var(--cyan); }
+
+    .attributes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.6rem; }
+    .attr-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 2rem; padding: 0.25rem 0.7rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; }
+    .btn-stat  { background: rgba(0,245,255,0.12); border: 1px solid rgba(0,245,255,0.3); color: var(--cyan); width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; transition: 0.2s; line-height:1; }
+    .btn-stat:hover { background: rgba(0,245,255,0.25); transform: scale(1.1); }
+    .points-left { color: var(--yellow); font-weight: bold; font-family: 'Share Tech Mono', monospace; }
+
+    .body-stats { display: flex; flex-direction: column; gap: 0.5rem; }
+    .body-stat-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem; }
+    .body-stat-row:last-child { border-bottom: none; }
+    .body-stat-label { font-size: 0.78rem; color: var(--text-dim); }
+    .body-stat-value { font-family: 'Share Tech Mono', monospace; font-size: 0.88rem; }
+    .progress-mini  { height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; margin-top: 0.3rem; }
+    .progress-fill  { height: 100%; border-radius: 3px; transition: width 0.5s; }
+
+    .tab-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 1rem; }
+    .tab-btn {
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(0,245,255,0.2);
+      color: var(--text-dim); padding: 0.45rem 1.1rem; border-radius: 2rem;
+      cursor: pointer; font-family: 'Orbitron', monospace; font-size: 0.65rem;
+      letter-spacing: 0.5px; transition: 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover { background: rgba(0,245,255,0.12); color: var(--cyan); border-color: var(--cyan); box-shadow: var(--glow-c); }
+    .tab-btn.tab-bulking.active, .tab-btn.tab-bulking:hover { background: rgba(251,146,60,0.12); color: var(--orange); border-color: var(--orange); box-shadow: var(--glow-o); }
+    .tab-btn.tab-skol.active, .tab-btn.tab-skol:hover { background: rgba(52,211,153,0.1); color: var(--green); border-color: var(--green); box-shadow: var(--glow-g); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-title {
+      font-family: 'Orbitron', monospace; font-size: 1rem;
+      color: var(--cyan); border-bottom: 1px solid rgba(0,245,255,0.18);
+      padding-bottom: 0.6rem; margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.5rem; letter-spacing: 1px;
+    }
+    .section-title.orange { color: var(--orange); border-bottom-color: rgba(251,146,60,0.25); }
+    .section-title.green  { color: var(--green);  border-bottom-color: rgba(52,211,153,0.25); }
+    .section-title.red    { color: var(--red);    border-bottom-color: rgba(248,113,113,0.25); }
+
+    .tasks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.2rem; margin-top: 1rem; }
+    .task-card {
+      background: rgba(8,16,30,0.9);
+      border-radius: 1.2rem; padding: 1.2rem;
+      border-left: 3px solid var(--cyan);
+      border-top: 1px solid rgba(0,245,255,0.1);
+      border-right: 1px solid rgba(0,245,255,0.05);
+      border-bottom: 1px solid rgba(0,245,255,0.05);
+      transition: 0.25s; box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .task-card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.5), var(--glow-c); }
+    .task-card.completed { opacity: 0.65; border-left-color: var(--green); background: rgba(52,211,153,0.05); }
+    .task-card.bulking-card { border-left-color: var(--orange); }
+    .task-card.bulking-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.5), var(--glow-o); }
+    .task-card.bulking-card.completed { border-left-color: var(--green); }
+
+    .task-title { font-size: 1.1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+    .task-desc  { font-size: 0.82rem; margin: 0.6rem 0; color: #8aabcf; line-height: 1.5; }
+    .task-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; }
+    .xp-reward { background: rgba(251,209,103,0.1); padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.75rem; font-weight: bold; color: var(--yellow); border: 1px solid rgba(251,209,103,0.25); }
+    .complete-btn {
+      background: linear-gradient(135deg, #0f2b5e, #0a1830);
+      border: 1px solid var(--cyan); color: white; padding: 0.38rem 0.9rem;
+      border-radius: 2rem; font-weight: 700; cursor: pointer; transition: 0.2s; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem;
+    }
+    .complete-btn:hover  { background: rgba(0,245,255,0.15); box-shadow: var(--glow-c); }
+    .complete-btn:active { transform: scale(0.96); }
+    .complete-btn:disabled { opacity:0.45; cursor:not-allowed; filter:grayscale(0.3); }
+    .complete-btn.bulking { border-color: var(--orange); }
+    .complete-btn.bulking:hover { background: rgba(251,146,60,0.15); box-shadow: var(--glow-o); }
+
+    .jadwal-section { margin: 1.5rem 0; }
+    .jadwal-table-wrap { overflow-x: auto; border-radius: 1rem; }
+    .jadwal-table { width:100%; border-collapse: collapse; font-size:0.82rem; min-width:560px; }
+    .jadwal-table thead tr { background: rgba(0,245,255,0.07); color: var(--cyan); font-family: 'Orbitron', monospace; font-size: 0.65rem; letter-spacing:1px; }
+    .jadwal-table th, .jadwal-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align:top; }
+    .jadwal-table tbody tr:hover { background: rgba(0,245,255,0.03); }
+    .jadwal-table tbody tr:last-child td { border-bottom: none; }
+    .stat-badge { display:inline-block; padding:0.12rem 0.5rem; border-radius:2rem; font-weight:bold; font-size:0.7rem; letter-spacing:0.5px; }
+    .badge-VIT  { background:rgba(52,211,153,0.15);  color:#34d399; border:1px solid #34d39955; }
+    .badge-STR  { background:rgba(248,113,113,0.15); color:#f87171; border:1px solid #f8717155; }
+    .badge-AGI  { background:rgba(251,191,36,0.15);  color:#fbbf24; border:1px solid #fbbf2455; }
+    .badge-INT  { background:rgba(129,140,248,0.15); color:#818cf8; border:1px solid #818cf855; }
+    .badge-BULK { background:rgba(251,146,60,0.15);  color:#fb923c; border:1px solid #fb923c55; }
+    .badge-REST { background:rgba(100,116,139,0.15); color:#94a3b8; border:1px solid #94a3b855; }
+    .time-cell  { color: #7ab8ff; font-family:'Share Tech Mono',monospace; white-space:nowrap; font-weight:600; }
+    .act-cell   { font-weight:700; color:#e2e8f0; }
+    .desc-cell  { color:#7a9ecc; line-height:1.45; }
+
+    .control-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0; align-items: center; }
+    .countdown { background: rgba(0,0,0,0.4); padding: 0.45rem 1rem; border-radius: 2rem; font-family:'Share Tech Mono',monospace; font-size:0.8rem; color: var(--text-dim); border: 1px solid rgba(255,255,255,0.07); }
+    .upgrade-btn { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); color:#c4b5fd; padding:0.45rem 1rem; border-radius:2rem; cursor:pointer; font-weight:600; font-family:'Rajdhani',sans-serif; transition:0.2s; }
+    .upgrade-btn:hover { background: rgba(139,92,246,0.25); box-shadow: var(--glow-p); }
+
+    /* ═══ BULKING ══════════════════════ */
+    .bmi-dashboard {
+      background: linear-gradient(135deg, rgba(251,146,60,0.06), rgba(8,16,30,0.9));
+      border: 1px solid rgba(251,146,60,0.25); border-radius: 1.5rem;
+      padding: 1.5rem; margin-bottom: 1.8rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 1.2rem;
+    }
+    .bmi-metric { text-align: center; }
+    .bmi-big    { font-family:'Orbitron',monospace; font-size:2.2rem; font-weight:800; line-height:1; }
+    .bmi-label  { font-size:0.7rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.5px; margin-top:0.3rem; font-family:'Share Tech Mono',monospace; }
+    .bmi-sub    { font-size:0.78rem; margin-top:0.2rem; color: var(--text); }
+    .bmi-status { display:inline-block; padding:0.2rem 0.7rem; border-radius:1rem; font-size:0.72rem; font-weight:700; margin-top:0.3rem; }
+    .status-under { background:rgba(251,146,60,0.15); color:var(--orange); border:1px solid rgba(251,146,60,0.3); }
+    .status-normal { background:rgba(52,211,153,0.15); color:var(--green); border:1px solid rgba(52,211,153,0.3); }
+    .bmi-gauge { position:relative; height:8px; background:rgba(255,255,255,0.07); border-radius:4px; margin-top:0.5rem; overflow:visible; }
+    .bmi-gauge-fill { height:100%; border-radius:4px; background: linear-gradient(90deg, #3b82f6, #34d399, #fbbf24, #f87171); }
+    .bmi-marker { position:absolute; top:-3px; width:14px; height:14px; border-radius:50%; background:white; border:2px solid var(--orange); transform:translateX(-50%); box-shadow:0 0 8px var(--orange); }
+    .progress-bar-wrap { margin: 1rem 0; }
+    .progress-bar-label { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim); margin-bottom:0.3rem; font-family:'Share Tech Mono',monospace; }
+    .progress-bar-bg { height:12px; background:rgba(255,255,255,0.07); border-radius:6px; overflow:hidden; }
+    .progress-bar-fill { height:100%; border-radius:6px; background:linear-gradient(90deg,var(--orange),var(--yellow)); box-shadow:0 0 10px rgba(251,146,60,0.5); transition:width 0.6s; }
+
+    .macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+    .macro-card {
+      background: var(--bg-card); border-radius: 1.1rem; padding: 1rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.07); text-align: center; transition: 0.2s;
+    }
+    .macro-card:hover { transform:translateY(-2px); }
+    .macro-card.protein { border-color: rgba(248,113,113,0.3); }
+    .macro-card.carbs   { border-color: rgba(251,191,36,0.3); }
+    .macro-card.fat     { border-color: rgba(139,92,246,0.3); }
+    .macro-card.cal     { border-color: rgba(52,211,153,0.3); }
+    .macro-number { font-family:'Orbitron',monospace; font-size:1.8rem; font-weight:800; }
+    .macro-card.protein .macro-number { color:var(--red); }
+    .macro-card.carbs   .macro-number { color:var(--yellow); }
+    .macro-card.fat     .macro-number { color:var(--purple); }
+    .macro-card.cal     .macro-number { color:var(--green); }
+    .macro-unit  { font-size:0.75rem; color:var(--text-dim); }
+    .macro-name  { font-size:0.8rem; font-weight:600; margin-top:0.2rem; }
+
+    .meal-plan { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+    .meal-item {
+      background: rgba(6,12,26,0.8); border-radius: 1rem; padding: 0.9rem 1.1rem;
+      border-left: 3px solid var(--orange);
+      border-top: 1px solid rgba(251,146,60,0.08);
+      display: grid; grid-template-columns: 80px 1fr auto;
+      gap: 0.8rem; align-items: center;
+    }
+    .meal-time  { font-family:'Share Tech Mono',monospace; font-size:0.75rem; color:#fb923c; font-weight:700; }
+    .meal-name  { font-weight:700; font-size:0.9rem; }
+    .meal-detail{ font-size:0.75rem; color:var(--text-dim); margin-top:0.2rem; }
+    .meal-kal   { font-family:'Share Tech Mono',monospace; font-size:0.78rem; color:var(--green); text-align:right; white-space:nowrap; }
+
+    .hyper-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; margin: 1rem 0; }
+    .hyper-card {
+      background: rgba(8,16,30,0.9); border-radius: 1.2rem; padding: 1.2rem;
+      border: 1px solid rgba(251,146,60,0.15);
+      border-left: 3px solid var(--orange);
+    }
+    .hyper-day  { font-family:'Orbitron',monospace; font-size:0.75rem; color:var(--orange); letter-spacing:1px; margin-bottom:0.5rem; }
+    .hyper-title{ font-weight:700; font-size:1rem; margin-bottom:0.7rem; }
+    .hyper-ex   { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
+    .hyper-ex li { font-size:0.8rem; color:#8aabcf; display:flex; gap:0.5rem; align-items:flex-start; padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+    .hyper-ex li:last-child { border:none; }
+    .hyper-ex .ex-name { font-weight:600; color:var(--text); flex:1; }
+    .hyper-ex .ex-set  { font-family:'Share Tech Mono',monospace; font-size:0.72rem; color:var(--yellow); white-space:nowrap; }
+
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; margin: 1rem 0; }
+    .tip-card {
+      background: rgba(6,12,26,0.7); border-radius: 1rem; padding: 1rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top: 3px solid;
+    }
+    .tip-card.green  { border-top-color: var(--green); }
+    .tip-card.orange { border-top-color: var(--orange); }
+    .tip-card.blue   { border-top-color: var(--blue); }
+    .tip-card.yellow { border-top-color: var(--yellow); }
+    .tip-icon  { font-size:1.4rem; margin-bottom:0.5rem; }
+    .tip-title { font-weight:700; font-size:0.9rem; margin-bottom:0.3rem; }
+    .tip-text  { font-size:0.78rem; color:var(--text-dim); line-height:1.5; }
+
+    .weight-tracker { background: var(--bg-card); border-radius: 1.3rem; padding: 1.3rem; border: 1px solid rgba(251,146,60,0.2); margin: 1.5rem 0; }
+    .tracker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .weight-entries { display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; }
+    .weight-entry { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border-radius: 0.7rem; padding: 0.45rem 0.8rem; font-family:'Share Tech Mono',monospace; font-size:0.78rem; }
+    .weight-entry .we-date { color: var(--text-dim); }
+    .weight-entry .we-val  { color: var(--orange); font-weight:700; }
+    .weight-entry .we-diff { font-size:0.7rem; }
+    .weight-entry .we-diff.up   { color: var(--green); }
+    .weight-entry .we-diff.down { color: var(--red); }
+    .weight-entry .we-diff.same { color: var(--text-dim); }
+    .weight-form { display: flex; gap: 0.6rem; margin-top: 0.8rem; }
+    .weight-input {
+      flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(251,146,60,0.3);
+      color: var(--text); padding: 0.45rem 0.8rem; border-radius: 2rem; font-family:'Share Tech Mono',monospace; font-size:0.85rem; outline:none;
+    }
+    .weight-input:focus { border-color: var(--orange); box-shadow: var(--glow-o); }
+    .weight-save { background: rgba(251,146,60,0.15); border: 1px solid var(--orange); color: var(--orange); padding: 0.45rem 1rem; border-radius: 2rem; cursor: pointer; font-weight:700; transition:0.2s; font-family:'Rajdhani',sans-serif; }
+    .weight-save:hover { background: rgba(251,146,60,0.25); }
+
+    .info-box { border-radius: 1rem; padding: 0.8rem 1rem; font-size: 0.8rem; display: flex; gap: 0.6rem; align-items: flex-start; margin: 1rem 0; line-height: 1.5; }
+    .info-box.orange { background: rgba(251,146,60,0.07); border: 1px solid rgba(251,146,60,0.25); color: #fde68a; }
+    .info-box.cyan   { background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.2);  color: #a5f3fc; }
+    .info-box.green  { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); color: #a7f3d0; }
+    .info-box.red    { background: rgba(248,113,113,0.07); border: 1px solid rgba(248,113,113,0.25); color: #fca5a5; }
+    .info-box i { flex-shrink:0; margin-top:2px; }
+
+    /* ═══════════════════════════════════
+       SKOLIOSIS ENHANCED
+    ═══════════════════════════════════ */
+    .skol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.3rem; margin-top: 1rem; }
+    .skol-card { background: rgba(8,16,28,0.8); border-radius: 1.2rem; padding: 1.2rem; border: 1px solid var(--border); }
+    .skol-card.do   { border-left: 3px solid var(--green); }
+    .skol-card.dont { border-left: 3px solid var(--red); }
+    .skol-card-title { font-family:'Orbitron',monospace; font-size:0.82rem; font-weight:700; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
+    .skol-card.do   .skol-card-title { color: var(--green); }
+    .skol-card.dont .skol-card-title { color: var(--red); }
+    .skol-list { list-style:none; }
+    .skol-list li { display:flex; gap:0.5rem; padding:0.4rem 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.8rem; color:#8aabcf; line-height:1.4; }
+    .skol-list li:last-child { border:none; }
+    .icon-do   { color: var(--green); flex-shrink:0; margin-top:2px; }
+    .icon-dont { color: var(--red);   flex-shrink:0; margin-top:2px; }
+
+    /* Skoliosis - new therapy cards */
+    .therapy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .therapy-card {
+      background: rgba(6,14,28,0.85);
+      border-radius: 1.3rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.25s;
+    }
+    .therapy-card:hover { transform: translateY(-2px); }
+    .therapy-card.t-green  { border-top: 3px solid var(--green); }
+    .therapy-card.t-cyan   { border-top: 3px solid var(--cyan); }
+    .therapy-card.t-purple { border-top: 3px solid var(--purple); }
+    .therapy-card.t-orange { border-top: 3px solid var(--orange); }
+    .therapy-card.t-blue   { border-top: 3px solid var(--blue); }
+    .therapy-card.t-yellow { border-top: 3px solid var(--yellow); }
+    .therapy-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .therapy-title { font-family: 'Orbitron', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    .therapy-card.t-green  .therapy-title { color: var(--green); }
+    .therapy-card.t-cyan   .therapy-title { color: var(--cyan); }
+    .therapy-card.t-purple .therapy-title { color: var(--purple); }
+    .therapy-card.t-orange .therapy-title { color: var(--orange); }
+    .therapy-card.t-blue   .therapy-title { color: var(--blue); }
+    .therapy-card.t-yellow .therapy-title { color: var(--yellow); }
+    .therapy-body { font-size: 0.78rem; color: var(--text-dim); line-height: 1.55; }
+    .therapy-body strong { color: var(--text); }
+    .therapy-steps { list-style: none; margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .therapy-steps li { display: flex; gap: 0.5rem; font-size: 0.77rem; color: #8aabcf; align-items: flex-start; }
+    .therapy-steps li::before { content: '▸'; flex-shrink: 0; margin-top: 1px; }
+
+    /* Severity scale */
+    .severity-scale {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin: 1rem 0 1.5rem;
+    }
+    .severity-item {
+      flex: 1; min-width: 180px;
+      background: rgba(6,12,26,0.8);
+      border-radius: 1rem;
+      padding: 1rem;
+      border-left: 4px solid;
+    }
+    .severity-item.mild   { border-color: var(--green); }
+    .severity-item.mod    { border-color: var(--yellow); }
+    .severity-item.severe { border-color: var(--red); }
+    .sev-label { font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:1px; margin-bottom:0.3rem; }
+    .severity-item.mild   .sev-label { color: var(--green); }
+    .severity-item.mod    .sev-label { color: var(--yellow); }
+    .severity-item.severe .sev-label { color: var(--red); }
+    .sev-angle { font-family:'Share Tech Mono',monospace; font-size:1.3rem; font-weight:700; }
+    .sev-desc { font-size:0.75rem; color:var(--text-dim); margin-top:0.3rem; line-height:1.4; }
+    .sev-action { margin-top:0.4rem; font-size:0.72rem; font-weight:600; }
+
+    /* Worsening factors */
+    .worsen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.9rem;
+      margin: 1rem 0;
+    }
+    .worsen-card {
+      background: rgba(248,113,113,0.04);
+      border: 1px solid rgba(248,113,113,0.15);
+      border-radius: 1rem;
+      padding: 0.9rem;
+      border-left: 3px solid var(--red);
+    }
+    .worsen-title { font-weight: 700; font-size: 0.85rem; color: #fca5a5; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+    .worsen-desc { font-size: 0.77rem; color: var(--text-dim); line-height: 1.45; }
+
+    /* Exercise protocol accordion */
+    .ex-protocol { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0; }
+    .ex-proto-item {
+      background: rgba(52,211,153,0.04);
+      border: 1px solid rgba(52,211,153,0.12);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .ex-proto-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ex-proto-header:hover { background: rgba(52,211,153,0.06); }
+    .ex-proto-title { font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
+    .ex-proto-badge { font-family:'Share Tech Mono',monospace; font-size:0.68rem; color:var(--green); background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); padding:0.15rem 0.5rem; border-radius:1rem; }
+    .ex-proto-body { padding: 0 1rem 0.9rem; display: none; }
+    .ex-proto-body.open { display: block; }
+    .ex-steps { display: flex; flex-direction: column; gap: 0.5rem; }
+    .ex-step { display: flex; gap: 0.7rem; font-size: 0.78rem; color: #8aabcf; align-items: flex-start; }
+    .ex-step-num { background: rgba(52,211,153,0.15); color: var(--green); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; font-weight: 700; margin-top: 1px; }
+
+    footer { text-align:center; margin-top:2rem; font-size:0.7rem; color:var(--text-dim); padding-top:1rem; border-top:1px solid rgba(255,255,255,0.05); }
+
+    .toast {
+      position:fixed; bottom:70px; right:20px; z-index:9998;
+      padding:0.6rem 1.1rem; border-radius:2rem;
+      font-size:0.8rem; font-weight:700; font-family:'Rajdhani',sans-serif;
+      animation: toastIn 0.3s ease; pointer-events:none;
+    }
+    .toast.xp    { background:#007a90; border:1px solid var(--cyan); color:white; }
+    .toast.bulk  { background:#7a3800; border:1px solid var(--orange); color:white; }
+    .toast.level { background:#3d2b80; border:1px solid var(--purple); color:white; font-size:1rem; }
+    .toast.auth  { background:#002d44; border:1px solid var(--cyan); color:white; }
+    @keyframes toastIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,245,255,0.4); }
+
+    @media (max-width: 700px) {
+      body { padding: 0.8rem; }
+      .system-container { padding: 1.1rem; }
+      .header-system { flex-direction:column; align-items:flex-start; }
+      .title-section h1 { font-size: 1.4rem; }
+      .bmi-dashboard { grid-template-columns: repeat(2,1fr); }
+      .meal-item { grid-template-columns: 70px 1fr auto; }
+      .auth-box { padding: 1.8rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     AUTH OVERLAY
+═══════════════════════════════════════════════════ -->
+<div id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <span class="auth-icon">⚡</span>
+      <h1>SOLO SYSTEM</h1>
+      <p>STIN Preparation · Shadow Bulk Protocol</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLoginBtn" onclick="switchAuthTab('login')">LOGIN</button>
+      <button class="auth-tab" id="tabRegisterBtn" onclick="switchAuthTab('register')">DAFTAR</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form active" id="loginForm">
+      <div class="auth-field">
+        <label><i class="fas fa-user"></i> Username</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-user"></i>
+          <input class="auth-input" type="text" id="loginUsername" placeholder="Masukkan username" autocomplete="username">
+        </div>
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-lock"></i> Password</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-lock"></i>
+          <input class="auth-input" type="password" id="loginPassword" placeholder="Masukkan password" autocomplete="current-password">
+          <button class="pw-toggle" type="button" onclick="togglePw('loginPassword',this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="auth-error" id="loginError"></div>
+      <button class="auth-submit" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> &nbsp;MASUK</button>
+      <div class="auth-user-list" id="loginUserHint"></div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="auth-form" id="registerForm">
+      <div class="auth-field">
+        <label><i class="fas fa-user-plus"></i> Username</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-user-plus"></i>
+          <input class="auth-input" type="text" id="regUsername" placeholder="Buat username (min 3 karakter)" autocomplete="off">
+        </div>
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-id-badge"></i> Nama Panggilan</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-id-badge"></i>
+          <input class="auth-input" type="text" id="regNickname" placeholder="Nama yang tampil di sistem">
+        </div>
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-lock"></i> Password</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-lock"></i>
+          <input class="auth-input" type="password" id="regPassword" placeholder="Min 6 karakter" autocomplete="new-password">
+          <button class="pw-toggle" type="button" onclick="togglePw('regPassword',this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="auth-field">
+        <label><i class="fas fa-check-double"></i> Konfirmasi Password</label>
+        <div class="auth-input-wrap">
+          <i class="fas fa-check-double"></i>
+          <input class="auth-input" type="password" id="regPassword2" placeholder="Ulangi password" autocomplete="new-password">
+          <button class="pw-toggle" type="button" onclick="togglePw('regPassword2',this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="auth-error" id="registerError"></div>
+      <button class="auth-submit" onclick="doRegister()"><i class="fas fa-user-astronaut"></i> &nbsp;BUAT AKUN — SOLO SYSTEM!</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN APP
+═══════════════════════════════════════════════════ -->
+<div class="system-container" id="app" style="display:none;">
+
+  <!-- HEADER -->
+  <div class="header-system">
+    <div class="title-section">
+      <h1><span class="neon-text">⚡ Solo SYSTEM</span></h1>
+      <p>Solo Leveling · Road to STIN · Shadow Bulk Protocol</p>
+    </div>
+    <div class="header-badges">
+      <div class="badge-pill badge-week"><i class="fas fa-calendar-week"></i> WEEK <span id="weekNumber">1</span></div>
+      <div class="badge-pill badge-bmi">BMI 18.4 → TARGET 22+</div>
+      <div class="badge-pill badge-goal"><i class="fas fa-bullseye"></i> +8 KG TARGET</div>
+      <!-- User Chip -->
+      <div class="user-chip" onclick="showLogoutConfirm()" title="Klik untuk logout">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span id="userDisplayName">Player</span>
+        <i class="fas fa-sign-out-alt" style="font-size:0.7rem;"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="card-label"><i class="fas fa-user-shield"></i> Shadow Rank</div>
+      <div class="rank-row">
+        <h2 id="playerLevel" style="font-size:1.6rem;">Lv. 1</h2>
+        <span class="rank-badge" id="rankLabel">E-Rank</span>
+      </div>
+      <div class="xp-bar-bg"><div class="xp-fill" id="xpFill"></div></div>
+      <div style="font-size:0.8rem;font-family:'Share Tech Mono',monospace;">
+        <span id="currentXP">0</span> / <span id="nextXP">100</span> XP
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="card-label"><i class="fas fa-chart-bar"></i> Attributes — <span class="points-left" id="attributePoints">0</span> pts</div>
+      <div class="attributes" id="statsContainer"></div>
+      <div style="font-size:0.68rem;color:var(--text-dim);margin-top:0.6rem;"><i class="fas fa-level-up-alt"></i> +3 pts per level up</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="card-label"><i class="fas fa-weight"></i> Body Status</div>
+      <div class="body-stats">
+        <div class="body-stat-row">
+          <span class="body-stat-label">Berat Badan</span>
+          <span class="body-stat-value" style="color:var(--orange);" id="currentWeight">57.0 kg</span>
+        </div>
+        <div class="body-stat-row">
+          <span class="body-stat-label">Tinggi</span>
+          <span class="body-stat-value">176 cm</span>
+        </div>
+        <div class="body-stat-row">
+          <span class="body-stat-label">BMI</span>
+          <span class="body-stat-value" id="bmiValue" style="color:var(--orange);">18.4</span>
+        </div>
+        <div class="body-stat-row">
+          <span class="body-stat-label">Target BB</span>
+          <span class="body-stat-value" style="color:var(--green);">65 kg</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-label">
+            <span>Progress Bulking</span>
+            <span id="bulkPct">0%</span>
+          </div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="bulkProgressBar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="card-label"><i class="fas fa-scroll"></i> Shadow System</div>
+      <div style="font-size:0.85rem;line-height:1.6;">Latihan naik otomatis tiap 7 hari. Level memengaruhi misi lebih berat & reward lebih besar.</div>
+      <div id="nextUpgradeTimer" class="countdown" style="margin-top:0.6rem;"><i class="far fa-clock"></i> --</div>
+      <button id="forceUpgradeBtn" class="upgrade-btn" style="margin-top:0.7rem;width:100%;"><i class="fas fa-forward"></i> Force Next Week (Demo)</button>
+    </div>
+  </div>
+
+  <!-- WEEKLY QUEST -->
+  <div style="margin-bottom:0.5rem;">
+    <h2 style="font-size:1.1rem;"><i class="fas fa-dungeon" style="color:var(--cyan);"></i> <span class="neon-text">WEEKLY QUEST</span> — STIN + BULK</h2>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-top:0.3rem;">Selesaikan semua misi untuk EXP, naik rank, & progress bulking!</p>
+  </div>
+  <div class="tasks-grid" id="tasksContainer">
+    <div class="task-card">Memuat misi...</div>
+  </div>
+
+  <div class="control-bar">
+    <div class="countdown"><i class="fas fa-sync-alt"></i> Auto-reset tiap Senin 00:00</div>
+  </div>
+
+  <!-- TAB NAVIGATION -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('tab-jadwal',this)"><i class="fas fa-clock"></i> Jadwal Harian</button>
+    <button class="tab-btn tab-bulking" onclick="switchTab('tab-bulking',this)"><i class="fas fa-drumstick-bite"></i> Bulking Protocol</button>
+    <button class="tab-btn tab-bulking" onclick="switchTab('tab-hyper',this)"><i class="fas fa-dumbbell"></i> Hypertrophy Plan</button>
+    <button class="tab-btn tab-skol" onclick="switchTab('tab-scoliosis',this)"><i class="fas fa-bone"></i> Panduan Skoliosis</button>
+  </div>
+
+  <!-- TAB 1: JADWAL -->
+  <div class="tab-panel active" id="tab-jadwal">
+    <div class="jadwal-section">
+      <div class="section-title"><i class="fas fa-calendar-day"></i> JADWAL HARIAN — SHADOW MONARCH + BULK PROTOCOL</div>
+      <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:1rem;">Jadwal telah diintegrasikan dengan program bulking. Slot makan ditandai <span class="stat-badge badge-BULK">BULK</span> khusus untuk surplus kalori.</p>
+      <div class="jadwal-table-wrap">
+        <table class="jadwal-table">
+          <thead><tr><th>WAKTU</th><th>AKTIVITAS</th><th>STAT</th><th>KETERANGAN</th></tr></thead>
+          <tbody>
+            <tr><td class="time-cell">04.30–05.00</td><td class="act-cell">🌙 Spiritual</td><td><span class="stat-badge badge-VIT">VIT</span></td><td class="desc-cell">Bangun, minum 1 gelas air putih, Salat Subuh.</td></tr>
+            <tr><td class="time-cell">05.00–05.15</td><td class="act-cell">🥛 Pre-Workout Meal</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell"><strong>Wajib sebelum latihan:</strong> 2 pisang + susu full-cream 250ml + 1 telor rebus. (~350 kal, fast carb untuk energi)</td></tr>
+            <tr><td class="time-cell">05.15–06.00</td><td class="act-cell">🏃 Shadow Stamina</td><td><span class="stat-badge badge-AGI">AGI</span></td><td class="desc-cell">Jogging ringan 2–3 km (jangan berlebihan, hemat kalori untuk bulking).</td></tr>
+            <tr><td class="time-cell">06.00–07.00</td><td class="act-cell">💪 Physical Conditioning</td><td><span class="stat-badge badge-STR">STR</span></td><td class="desc-cell">Push-up, Pull-up, Dip, Squat sesuai target mingguan. Fokus slow-rep untuk hypertrophy.</td></tr>
+            <tr><td class="time-cell">07.00–07.45</td><td class="act-cell">🍳 Post-Workout Feast</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell"><strong>WAJIB dalam 30 menit setelah latihan:</strong> Nasi 2 centong + 2 telor + tempe goreng + susu. (~700 kal). Momen anabolik terbaik!</td></tr>
+            <tr><td class="time-cell">08.00–10.00</td><td class="act-cell">📚 SKD Phase I: TWK</td><td><span class="stat-badge badge-INT">INT</span></td><td class="desc-cell">Materi Pilar Negara, Nasionalisme, dan Integritas.</td></tr>
+            <tr><td class="time-cell">10.00–10.20</td><td class="act-cell">🥜 Snack Pagi</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell">Kacang almond/mede segenggam + 1 pisang atau roti + selai kacang. (~300 kal).</td></tr>
+            <tr><td class="time-cell">10.20–12.00</td><td class="act-cell">🧮 SKD Phase II: TIU</td><td><span class="stat-badge badge-INT">INT</span></td><td class="desc-cell">Logika, silogisme, dan berhitung cepat.</td></tr>
+            <tr><td class="time-cell">12.00–13.30</td><td class="act-cell">🍛 BULK LUNCH</td><td><span class="stat-badge badge-BULK">BULK</span> <span class="stat-badge badge-VIT">VIT</span></td><td class="desc-cell"><strong>Makan besar:</strong> Nasi 3 centong + ayam/ikan/daging 150g + sayur + tahu/tempe. (~900 kal). Salat Dhuhur + power nap 15 menit.</td></tr>
+            <tr><td class="time-cell">13.30–15.30</td><td class="act-cell">🧠 SKD Phase III: TKP</td><td><span class="stat-badge badge-INT">INT</span></td><td class="desc-cell">Soal karakteristik pribadi, mindset intelijen.</td></tr>
+            <tr><td class="time-cell">15.30–16.00</td><td class="act-cell">🍌 Snack Sore</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell">Shake protein homemade: susu 400ml + oat 3 sdm + 2 pisang + madu. (~450 kal).</td></tr>
+            <tr><td class="time-cell">16.30–17.30</td><td class="act-cell">⚡ Hypertrophy Session</td><td><span class="stat-badge badge-STR">STR</span></td><td class="desc-cell">Sesi gym / calisthenics tambahan (sesuai split Hypertrophy Plan).</td></tr>
+            <tr><td class="time-cell">17.30–19.30</td><td class="act-cell">🌇 Transition & Salat</td><td><span class="stat-badge badge-VIT">VIT</span></td><td class="desc-cell">Mandi, istirahat, Salat Magrib & Isya.</td></tr>
+            <tr><td class="time-cell">19.00–19.30</td><td class="act-cell">🍖 DINNER BESAR</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell"><strong>Makan malam tinggi protein:</strong> Nasi + daging/ayam 200g + telur 2 butir + sayur. (~900 kal).</td></tr>
+            <tr><td class="time-cell">19.30–21.00</td><td class="act-cell">🔍 Shadow Analysis</td><td><span class="stat-badge badge-INT">INT</span></td><td class="desc-cell">Review soal, baca geopolitik, analisis intelijen.</td></tr>
+            <tr><td class="time-cell">21.00–21.30</td><td class="act-cell">🥛 Pre-Sleep Meal</td><td><span class="stat-badge badge-BULK">BULK</span></td><td class="desc-cell">Susu full-cream 250ml + roti gandum + selai kacang. (~350 kal). Kasein lambat dicerna = grow selama tidur!</td></tr>
+            <tr><td class="time-cell">21.30–22.00</td><td class="act-cell">👑 Mental Monarch</td><td><span class="stat-badge badge-VIT">VIT</span></td><td class="desc-cell">Meditasi, evaluasi diri, catat berat badan, input progres sistem.</td></tr>
+            <tr><td class="time-cell">22.00–04.30</td><td class="act-cell">💤 Deep Sleep (Growth)</td><td><span class="stat-badge badge-VIT">VIT</span></td><td class="desc-cell">6.5 jam tidur penuh = puncak produksi Growth Hormone. Jangan kurang!</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: BULKING PROTOCOL -->
+  <div class="tab-panel" id="tab-bulking">
+    <div class="section-title orange"><i class="fas fa-drumstick-bite"></i> SHADOW BULK PROTOCOL — 57kg → 65kg TARGET</div>
+    <div class="bmi-dashboard">
+      <div class="bmi-metric">
+        <div class="bmi-big neon-orange">18.4</div>
+        <div class="bmi-label">BMI Sekarang</div>
+        <div class="bmi-status status-under">Underweight</div>
+      </div>
+      <div class="bmi-metric">
+        <div class="bmi-big" style="color:var(--green);">22.0</div>
+        <div class="bmi-label">Target BMI</div>
+        <div class="bmi-status status-normal">Normal Ideal</div>
+      </div>
+      <div class="bmi-metric">
+        <div class="bmi-big" style="color:var(--yellow);">3200</div>
+        <div class="bmi-label">Kalori / Hari</div>
+        <div class="bmi-sub">+600 dari TDEE ~2600</div>
+      </div>
+      <div class="bmi-metric">
+        <div class="bmi-big" style="color:var(--purple);">8 kg</div>
+        <div class="bmi-label">Target Naik BB</div>
+        <div class="bmi-sub">~4–6 bulan clean bulk</div>
+      </div>
+    </div>
+
+    <div style="margin: -0.5rem 0 1.5rem;">
+      <div style="font-size:0.75rem;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:0.4rem;">BMI GAUGE — Sekarang vs Target</div>
+      <div class="bmi-gauge"><div class="bmi-gauge-fill" style="width:100%;"></div><div class="bmi-marker" style="left:17.1%;"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-top:0.3rem;">
+        <span>16 (Kurus)</span><span>18.5 (Normal)</span><span>25 (Lebih)</span><span>30 (Obese)</span>
+      </div>
+    </div>
+
+    <div class="weight-tracker">
+      <div class="tracker-header">
+        <div class="section-title orange" style="margin:0;border:none;"><i class="fas fa-weight-hanging"></i> WEIGHT TRACKER</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);font-family:'Share Tech Mono',monospace;">Target: 65 kg</div>
+      </div>
+      <div class="weight-entries" id="weightEntries">
+        <div style="text-align:center;color:var(--text-dim);font-size:0.8rem;padding:1rem;">Belum ada data. Catat berat badan pertamamu!</div>
+      </div>
+      <div class="weight-form">
+        <input class="weight-input" type="number" id="weightInput" placeholder="Masukkan berat (kg)" step="0.1" min="40" max="120">
+        <button class="weight-save" onclick="saveWeight()"><i class="fas fa-save"></i> Catat</button>
+      </div>
+    </div>
+
+    <div class="section-title orange" style="margin-top:1.5rem;"><i class="fas fa-fire"></i> TARGET NUTRISI HARIAN</div>
+    <div class="macro-grid">
+      <div class="macro-card cal"><div class="macro-number">3200</div><div class="macro-unit">kcal / hari</div><div class="macro-name">Total Kalori</div></div>
+      <div class="macro-card protein"><div class="macro-number">160</div><div class="macro-unit">gram / hari (2g/kg BB)</div><div class="macro-name">Protein 🥩</div></div>
+      <div class="macro-card carbs"><div class="macro-number">400</div><div class="macro-unit">gram / hari</div><div class="macro-name">Karbohidrat 🍚</div></div>
+      <div class="macro-card fat"><div class="macro-number">90</div><div class="macro-unit">gram / hari</div><div class="macro-name">Lemak Sehat 🥑</div></div>
+    </div>
+
+    <div class="section-title orange"><i class="fas fa-utensils"></i> MEAL PLAN HARIAN (BUDGET FRIENDLY)</div>
+    <div class="meal-plan">
+      <div class="meal-item"><div class="meal-time">05.00<br>Pre-WO</div><div><div class="meal-name">🍌 Pre-Workout Fuel</div><div class="meal-detail">2 pisang + susu full-cream 250ml + 1 telur rebus</div></div><div class="meal-kal">~350 kal<br><span style="color:var(--red);font-size:0.68rem;">P:15g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:55g</span></div></div>
+      <div class="meal-item"><div class="meal-time">07.00<br>Post-WO</div><div><div class="meal-name">🍳 Post-Workout Feast</div><div class="meal-detail">Nasi 200g + 2 telur dadar + tempe goreng 100g + susu 200ml</div></div><div class="meal-kal">~700 kal<br><span style="color:var(--red);font-size:0.68rem;">P:40g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:80g</span></div></div>
+      <div class="meal-item"><div class="meal-time">10.00<br>Snack 1</div><div><div class="meal-name">🥜 Snack Pagi</div><div class="meal-detail">Roti gandum 2 lbr + selai kacang 2 sdm + pisang 1 buah</div></div><div class="meal-kal">~300 kal<br><span style="color:var(--red);font-size:0.68rem;">P:12g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:40g</span></div></div>
+      <div class="meal-item"><div class="meal-time">12.00<br>Lunch</div><div><div class="meal-name">🍛 Makan Siang BESAR</div><div class="meal-detail">Nasi 3 centong (300g) + ayam/ikan 150g + sayur + tahu goreng</div></div><div class="meal-kal">~900 kal<br><span style="color:var(--red);font-size:0.68rem;">P:45g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:120g</span></div></div>
+      <div class="meal-item"><div class="meal-time">15.30<br>Snack 2</div><div><div class="meal-name">🥤 Homemade Gainer Shake</div><div class="meal-detail">Susu full-cream 400ml + oat 3 sdm + 2 pisang + 1 sdm madu blend</div></div><div class="meal-kal">~450 kal<br><span style="color:var(--red);font-size:0.68rem;">P:18g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:70g</span></div></div>
+      <div class="meal-item"><div class="meal-time">19.00<br>Dinner</div><div><div class="meal-name">🍖 Dinner Tinggi Protein</div><div class="meal-detail">Nasi 250g + daging/ayam 200g + 2 telur + sayur rebus</div></div><div class="meal-kal">~900 kal<br><span style="color:var(--red);font-size:0.68rem;">P:55g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:90g</span></div></div>
+      <div class="meal-item"><div class="meal-time">21.30<br>Pre-Sleep</div><div><div class="meal-name">🥛 Kasein Night Feed</div><div class="meal-detail">Susu full-cream 250ml + roti + selai kacang — protein lambat saat tidur</div></div><div class="meal-kal">~350 kal<br><span style="color:var(--red);font-size:0.68rem;">P:15g</span> <span style="color:var(--yellow);font-size:0.68rem;">C:40g</span></div></div>
+    </div>
+    <div class="info-box orange"><i class="fas fa-fire-alt"></i><span><strong>Total ~3.200 kcal/hari.</strong> Surplus 500–600 kcal optimal untuk lean bulk. Timbang badan setiap pagi setelah BAK untuk data akurat.</span></div>
+    <div class="section-title orange" style="margin-top:1.5rem;"><i class="fas fa-lightbulb"></i> BULKING TIPS PENTING</div>
+    <div class="tips-grid">
+      <div class="tip-card orange"><div class="tip-icon">🥩</div><div class="tip-title">Prioritas Protein</div><div class="tip-text">Makan 2g protein per kg BB = 114–130g protein/hari. Sumber terbaik: telur, ayam, ikan, tempe, tahu, susu.</div></div>
+      <div class="tip-card green"><div class="tip-icon">😴</div><div class="tip-title">Tidur = Tumbuh</div><div class="tip-text">80% Growth Hormone diproduksi saat tidur. Minimal 7–8 jam. Kurang tidur = otot tidak tumbuh.</div></div>
+      <div class="tip-card blue"><div class="tip-icon">💪</div><div class="tip-title">Progressive Overload</div><div class="tip-text">Tambah beban atau repetisi setiap minggu. Catat progress latihan tiap sesi!</div></div>
+      <div class="tip-card yellow"><div class="tip-icon">🕐</div><div class="tip-title">Konsistensi 90 Hari</div><div class="tip-text">Bulking natural membutuhkan waktu. Harapkan +0.5–1 kg/bulan dari massa otot.</div></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: HYPERTROPHY -->
+  <div class="tab-panel" id="tab-hyper">
+    <div class="section-title orange"><i class="fas fa-dumbbell"></i> HYPERTROPHY SPLIT — SHADOW BODY PROTOCOL</div>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:1.2rem;">Program latihan beban 5 hari/minggu fokus mass building. Slow eccentric (turunkan beban 3 detik) untuk maksimalkan hypertrophy.</p>
+    <div class="info-box orange"><i class="fas fa-exclamation-triangle"></i><span><strong>Catatan Skoliosis:</strong> Hindari deadlift berat dan barbell squat heavy. Gunakan dumbbell, resistance band, dan mesin cable.</span></div>
+    <div class="hyper-grid" style="margin-top:1.2rem;">
+      <div class="hyper-card"><div class="hyper-day">SENIN</div><div class="hyper-title">🫁 Dada + Trisep</div><ul class="hyper-ex"><li><span class="ex-name">Dumbbell Bench Press</span><span class="ex-set">4×10</span></li><li><span class="ex-name">Incline DB Press</span><span class="ex-set">3×12</span></li><li><span class="ex-name">Push-up Slow (3s down)</span><span class="ex-set">4×15</span></li><li><span class="ex-name">Cable Fly / Band Fly</span><span class="ex-set">3×15</span></li><li><span class="ex-name">Tricep Dip (bench)</span><span class="ex-set">4×12</span></li><li><span class="ex-name">Overhead DB Extension</span><span class="ex-set">3×12</span></li></ul></div>
+      <div class="hyper-card"><div class="hyper-day">SELASA</div><div class="hyper-title">🦾 Punggung + Bisep</div><ul class="hyper-ex"><li><span class="ex-name">Pull-up / Lat Pulldown</span><span class="ex-set">4×8</span></li><li><span class="ex-name">DB Row (satu tangan)</span><span class="ex-set">4×10</span></li><li><span class="ex-name">Cable Row / Band Row</span><span class="ex-set">3×12</span></li><li><span class="ex-name">Face Pull (band)</span><span class="ex-set">3×15</span></li><li><span class="ex-name">DB Curl</span><span class="ex-set">4×12</span></li><li><span class="ex-name">Hammer Curl</span><span class="ex-set">3×12</span></li></ul></div>
+      <div class="hyper-card"><div class="hyper-day">RABU</div><div class="hyper-title">🦿 Kaki + Glute</div><ul class="hyper-ex"><li><span class="ex-name">Goblet Squat (DB)</span><span class="ex-set">4×12</span></li><li><span class="ex-name">DB Lunges</span><span class="ex-set">3×12/kaki</span></li><li><span class="ex-name">Romanian Deadlift (DB)</span><span class="ex-set">4×10</span></li><li><span class="ex-name">Leg Press (mesin)</span><span class="ex-set">4×15</span></li><li><span class="ex-name">Calf Raise</span><span class="ex-set">4×20</span></li><li><span class="ex-name">Hip Thrust (BB ringan)</span><span class="ex-set">3×15</span></li></ul></div>
+      <div class="hyper-card"><div class="hyper-day">KAMIS</div><div class="hyper-title">💪 Bahu + Inti</div><ul class="hyper-ex"><li><span class="ex-name">DB Shoulder Press</span><span class="ex-set">4×10</span></li><li><span class="ex-name">Lateral Raise</span><span class="ex-set">4×15</span></li><li><span class="ex-name">Front Raise</span><span class="ex-set">3×12</span></li><li><span class="ex-name">Rear Delt Fly</span><span class="ex-set">3×15</span></li><li><span class="ex-name">Plank Variasi</span><span class="ex-set">3×45dtk</span></li><li><span class="ex-name">Dead Bug</span><span class="ex-set">3×12</span></li></ul></div>
+      <div class="hyper-card"><div class="hyper-day">JUMAT</div><div class="hyper-title">🔄 Full Body Compound</div><ul class="hyper-ex"><li><span class="ex-name">Pull-up Max</span><span class="ex-set">3 set AMRAP</span></li><li><span class="ex-name">Push-up Explosive</span><span class="ex-set">3×20</span></li><li><span class="ex-name">DB Thruster</span><span class="ex-set">3×12</span></li><li><span class="ex-name">DB Romanian DL</span><span class="ex-set">3×12</span></li><li><span class="ex-name">Cable Woodchop</span><span class="ex-set">3×12/sisi</span></li><li><span class="ex-name">Farmer Carry (DB)</span><span class="ex-set">3×30m</span></li></ul></div>
+      <div class="hyper-card" style="border-color:rgba(52,211,153,0.2);border-left-color:var(--green);"><div class="hyper-day" style="color:var(--green);">SABTU & MINGGU</div><div class="hyper-title">🛌 Active Recovery</div><ul class="hyper-ex"><li><span class="ex-name">Renang ringan</span><span class="ex-set">30–45 min</span></li><li><span class="ex-name">Yoga / Stretching korektif</span><span class="ex-set">20 min</span></li><li><span class="ex-name">Jalan kaki santai</span><span class="ex-set">20–30 min</span></li><li><span class="ex-name">Fokus makan banyak & tidur!</span><span class="ex-set">😴</span></li></ul></div>
+    </div>
+    <div class="info-box green"><i class="fas fa-check-circle"></i><span><strong>Progressive Overload:</strong> Tambah berat 1–2 kg per 2 minggu, atau tambah 1–2 rep per minggu. Catat semua beban di buku/notes HP.</span></div>
+  </div>
+
+  <!-- TAB 4: SKOLIOSIS (ENHANCED) -->
+  <div class="tab-panel" id="tab-scoliosis">
+    <div class="section-title green"><i class="fas fa-bone"></i> SHADOW SPINE PROTOCOL — PANDUAN LENGKAP SKOLIOSIS</div>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:1.2rem;">Panduan komprehensif: cara meredakan, mencegah memburuk, latihan korektif, dan hal-hal yang MEMPERPARAH skoliosis.</p>
+
+    <!-- SEVERITY SCALE -->
+    <div class="section-title" style="font-size:0.88rem;"><i class="fas fa-ruler"></i> TINGKAT KEPARAHAN SKOLIOSIS (COBB ANGLE)</div>
+    <div class="severity-scale">
+      <div class="severity-item mild">
+        <div class="sev-label">RINGAN</div>
+        <div class="sev-angle" style="color:var(--green);">10° – 24°</div>
+        <div class="sev-desc">Bisa dikontrol penuh dengan latihan korektif, postur baik, dan fisioterapi. Tidak memerlukan brace/operasi.</div>
+        <div class="sev-action" style="color:var(--green);">✅ Latihan + Fisioterapi</div>
+      </div>
+      <div class="severity-item mod">
+        <div class="sev-label">SEDANG</div>
+        <div class="sev-angle" style="color:var(--yellow);">25° – 39°</div>
+        <div class="sev-desc">Perlu pengawasan dokter. Bisa butuh brace. Latihan tetap penting, harus dengan panduan profesional.</div>
+        <div class="sev-action" style="color:var(--yellow);">⚠️ Dokter + Brace + Latihan</div>
+      </div>
+      <div class="severity-item severe">
+        <div class="sev-label">BERAT</div>
+        <div class="sev-angle" style="color:var(--red);">≥ 40°</div>
+        <div class="sev-desc">Risiko gangguan paru & jantung. Kemungkinan butuh operasi spinal fusion. Konsultasi ortopedi wajib.</div>
+        <div class="sev-action" style="color:var(--red);">🚨 Konsultasi Segera!</div>
+      </div>
+    </div>
+
+    <!-- CARA MEREDAKAN / MEMBANTU PEMULIHAN -->
+    <div class="section-title green" style="margin-top:0.5rem;"><i class="fas fa-heartbeat"></i> CARA MEREDAKAN & MEMPERBAIKI SKOLIOSIS</div>
+    <div class="info-box green"><i class="fas fa-info-circle"></i><span><strong>Skoliosis struktural</strong> (tulang benar-benar bengkok) tidak bisa 100% hilang tanpa operasi, NAMUN dengan latihan konsisten kurva bisa berkurang 3–10° dan gejala nyeri bisa hilang total. Banyak pasien hidup normal penuh tanpa rasa sakit dengan manajemen yang tepat.</span></div>
+
+    <div class="therapy-grid">
+      <div class="therapy-card t-green">
+        <div class="therapy-icon">🏊</div>
+        <div class="therapy-title">RENANG — TERAPI TERBAIK</div>
+        <div class="therapy-body">
+          <strong>Aktivitas paling direkomendasikan untuk skoliosis.</strong> Air mengurangi gravitasi sehingga tulang belakang "bebas", semua otot bekerja simetris.
+          <ul class="therapy-steps">
+            <li>Gaya punggung & gaya dada paling aman dan efektif</li>
+            <li>2–3x seminggu, minimal 30 menit per sesi</li>
+            <li>Hindari gaya bebas berlebihan (rotasi satu arah terus)</li>
+            <li>Kombinasikan dengan latihan kaki di air (kicking)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="therapy-card t-cyan">
+        <div class="therapy-icon">🌀</div>
+        <div class="therapy-title">METODE SCHROTH</div>
+        <div class="therapy-body">
+          <strong>Terapi fisik paling terbukti untuk skoliosis.</strong> Dikembangkan di Jerman, fokus pada pernapasan 3D, elongasi, dan koreksi postur spesifik kurva.
+          <ul class="therapy-steps">
+            <li>Tarik napas ke sisi cekung (konkaf), tahan 3–5 detik</li>
+            <li>Buang napas sambil "memanjangkan" tulang belakang</li>
+            <li>Dilakukan 10–15 repetisi, 2x sehari (pagi & malam)</li>
+            <li>Cari fisioterapis bersertifikat Schroth untuk bimbingan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="therapy-card t-purple">
+        <div class="therapy-icon">🧘</div>
+        <div class="therapy-title">YOGA KOREKTIF</div>
+        <div class="therapy-body">
+          <strong>Efektif untuk fleksibilitas dan mengurangi nyeri.</strong> Yoga membantu meregangkan sisi cembung dan memperkuat sisi cekung secara bersamaan.
+          <ul class="therapy-steps">
+            <li><strong>Triangle Pose (Trikonasana):</strong> regangkan sisi cembung</li>
+            <li><strong>Cat-Cow:</strong> mobilisasi seluruh tulang belakang</li>
+            <li><strong>Child's Pose:</strong> dekompresi dan relaksasi</li>
+            <li><strong>Supine Twist (SATU ARAH saja):</strong> ke sisi cekung</li>
+            <li><strong>Bridge Pose:</strong> perkuat gluteus dan core</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="therapy-card t-orange">
+        <div class="therapy-icon">💪</div>
+        <div class="therapy-title">LATIHAN CORE & STABILISASI</div>
+        <div class="therapy-body">
+          <strong>Otot core yang kuat = "korset alami" untuk tulang belakang.</strong> Bukan sit-up biasa, tapi latihan stabilisasi dalam (deep stabilizers).
+          <ul class="therapy-steps">
+            <li><strong>Plank 3×45dtk:</strong> aktifkan transverse abdominis</li>
+            <li><strong>Dead Bug 3×10:</strong> core tanpa kompresi tulang</li>
+            <li><strong>Bird Dog 3×12:</strong> stabilisasi spinal & simetrisasi</li>
+            <li><strong>Side Plank (sisi cekung lebih lama):</strong> koreksi lateral</li>
+            <li><strong>McGill Big 3:</strong> protokol nyeri punggung terbukti</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="therapy-card t-blue">
+        <div class="therapy-icon">🩺</div>
+        <div class="therapy-title">FISIOTERAPI PROFESIONAL</div>
+        <div class="therapy-body">
+          <strong>Kunci hasil maksimal adalah bimbingan profesional.</strong> Fisioterapis dapat mengidentifikasi pola spesifik kurvamu dan membuat program individual.
+          <ul class="therapy-steps">
+            <li>Minimal 1x/bulan untuk monitor & koreksi program</li>
+            <li>Cari fisioterapis dengan spesialisasi muskuloskeletal/spinal</li>
+            <li>Minta latihan yang bisa dilakukan sendiri di rumah</li>
+            <li>Tanya tentang BRACE jika kurva 25–40°</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="therapy-card t-yellow">
+        <div class="therapy-icon">🛌</div>
+        <div class="therapy-title">POSTUR & KEBIASAAN HARIAN</div>
+        <div class="therapy-body">
+          <strong>Yang kamu lakukan 16 jam sehari lebih berdampak daripada 1 jam latihan.</strong>
+          <ul class="therapy-steps">
+            <li>Tidur miring ke sisi cekung — koreksi pasif saat istirahat</li>
+            <li>Gunakan bantal yang mendukung lekukan leher alami</li>
+            <li>Duduk tegak, bahu sejajar, layar setinggi mata</li>
+            <li>Alarm setiap 45 menit untuk stand & regangkan punggung</li>
+            <li>Selalu gunakan ransel 2 tali, bukan tas satu bahu</li>
+            <li>Saat berdiri lama, selingi satu kaki di atas injakan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATIHAN KOREKTIF SPESIFIK (ACCORDION) -->
+    <div class="section-title green" style="margin-top:1rem;"><i class="fas fa-clipboard-list"></i> PROTOKOL LATIHAN KOREKTIF HARIAN</div>
+    <div class="ex-protocol">
+      <div class="ex-proto-item">
+        <div class="ex-proto-header" onclick="toggleProto(this)">
+          <div class="ex-proto-title"><span>🌅</span> Rutinitas Pagi (10 menit) <span class="ex-proto-badge">WAJIB</span></div>
+          <i class="fas fa-chevron-down" style="color:var(--text-dim);font-size:0.75rem;"></i>
+        </div>
+        <div class="ex-proto-body">
+          <div class="ex-steps">
+            <div class="ex-step"><div class="ex-step-num">1</div><div><strong>Cat-Cow × 10 rep</strong> — Mulai dengan mobilisasi seluruh tulang belakang. Inhale saat arch (cow), exhale saat round (cat). Gerak perlahan.</div></div>
+            <div class="ex-step"><div class="ex-step-num">2</div><div><strong>Bird Dog × 12 rep/sisi</strong> — Jaga pinggul tetap level, jangan biarkan satu sisi lebih tinggi. Ini latihan proprioception tulang belakang.</div></div>
+            <div class="ex-step"><div class="ex-step-num">3</div><div><strong>Side Plank (sisi cekung) × 30–45 dtk</strong> — Fokus menekan ke atas dari sisi yang lebih lemah (cekung). Ini core exercise paling penting untuk skoliosis.</div></div>
+            <div class="ex-step"><div class="ex-step-num">4</div><div><strong>Schroth Breathing × 10 napas</strong> — Berbaring, taruh tangan di sisi rusuk cekung, rasakan rusuk berkembang ke arah tangan saat inhale.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ex-proto-item">
+        <div class="ex-proto-header" onclick="toggleProto(this)">
+          <div class="ex-proto-title"><span>☀️</span> Siang — Saat Belajar (5 menit, tiap 45 mnt) <span class="ex-proto-badge">PENTING</span></div>
+          <i class="fas fa-chevron-down" style="color:var(--text-dim);font-size:0.75rem;"></i>
+        </div>
+        <div class="ex-proto-body">
+          <div class="ex-steps">
+            <div class="ex-step"><div class="ex-step-num">1</div><div><strong>Berdiri & Wall Stand × 30 dtk</strong> — Berdiri membelakangi tembok, pastikan kepala, bahu, panggul, dan tumit menyentuh tembok. Ini "reset" postur.</div></div>
+            <div class="ex-step"><div class="ex-step-num">2</div><div><strong>Side Bend ke sisi cekung × 10</strong> — Angkat tangan di atas kepala, condong ke sisi cekung, tahan 2 dtk. Regangkan sisi cembung yang tegang.</div></div>
+            <div class="ex-step"><div class="ex-step-num">3</div><div><strong>Shoulder Roll Backward × 10</strong> — Putar bahu ke belakang untuk kontraposisi forward head posture saat belajar lama.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ex-proto-item">
+        <div class="ex-proto-header" onclick="toggleProto(this)">
+          <div class="ex-proto-title"><span>🌙</span> Rutinitas Malam (10 menit) <span class="ex-proto-badge">WAJIB</span></div>
+          <i class="fas fa-chevron-down" style="color:var(--text-dim);font-size:0.75rem;"></i>
+        </div>
+        <div class="ex-proto-body">
+          <div class="ex-steps">
+            <div class="ex-step"><div class="ex-step-num">1</div><div><strong>Child's Pose × 60 dtk</strong> — Dekompresi tulang belakang penuh. Kalau bisa, geser tangan ke sisi cembung untuk stretch lateral.</div></div>
+            <div class="ex-step"><div class="ex-step-num">2</div><div><strong>Supine Twist ke sisi cekung × 30 dtk</strong> — Berbaring, putar lutut ke sisi cekung saja (bukan dua arah). Tahan napas dalam posisi ini.</div></div>
+            <div class="ex-step"><div class="ex-step-num">3</div><div><strong>Dead Bug × 10 rep</strong> — Berbaring, punggung rata ke lantai, gerakkan lengan & kaki berlawanan perlahan. Jaga punggung tidak terangkat.</div></div>
+            <div class="ex-step"><div class="ex-step-num">4</div><div><strong>Prone Press-up (Cobra ringan) × 8 rep</strong> — Angkat badan dengan tangan, pinggul tetap di lantai. Bagus untuk kurva thoracic (punggung atas).</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAL YANG MEMPERPARAH -->
+    <div class="section-title red" style="margin-top:1.5rem;"><i class="fas fa-skull-crossbones"></i> YANG MEMPERPARAH SKOLIOSIS — HINDARI!</div>
+    <div class="info-box red"><i class="fas fa-exclamation-circle"></i><span><strong>PENTING:</strong> Hal-hal di bawah ini bisa mempercepat progresi kurva, meningkatkan nyeri, dan merusak postur secara permanen. Kebanyakan adalah kebiasaan sehari-hari yang sering diabaikan.</span></div>
+
+    <div class="worsen-grid">
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Beban Aksial Asimetris</div>
+        <div class="worsen-desc">Barbell squat berat, deadlift konvensional, dan standing shoulder press barbell memberikan tekanan vertikal langsung ke tulang bengkok. Ini bisa mempercepat progresi kurva dan herniasi disk.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Tas Bahu Satu Sisi</div>
+        <div class="worsen-desc">Membawa tas berat di satu bahu secara konsisten menciptakan pola otot asimetris kronis. Otak "belajar" postur miring ini dan mempertahankannya bahkan saat tidak pakai tas.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Duduk Bungkuk / Lama</div>
+        <div class="worsen-desc">Duduk dengan postur buruk selama 6–8 jam/hari adalah penyebab terbesar nyeri skoliosis memburuk. Tekanan pada disk meningkat 40% saat bungkuk dibanding berdiri tegak.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Olahraga Rotasi Satu Arah</div>
+        <div class="worsen-desc">Golf, bowling, baseball, tenis (non-ambigu) melatih pola rotasi yang sama terus-menerus. Ini memperburuk asimetri otot yang sudah ada akibat skoliosis.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Tidur Tengkurap</div>
+        <div class="worsen-desc">Memutar leher ke satu sisi selama berjam-jam menciptakan torsi di tulang belakang. Juga memberikan tekanan pada sendi facet yang sudah terkompresi di sisi cembung kurva.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Kurang Tidur & Stres</div>
+        <div class="worsen-desc">Stres meningkatkan kortisol → otot punggung menjadi hipertonik (kaku abnormal) → memperburuk ketidakseimbangan otot. Tidur kurang menghambat regenerasi jaringan ikat.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Crunch / Sit-up Penuh</div>
+        <div class="worsen-desc">Fleksi tulang belakang berulang dengan beban (sit-up) menambah kompresi pada disk yang sudah tidak simetris. Ganti dengan Dead Bug dan Hollow Body Hold yang jauh lebih aman.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Mengabaikan Nyeri Asimetris</div>
+        <div class="worsen-desc">Nyeri tajam di satu sisi punggung, mati rasa di kaki, atau nyeri menjalar ke bokong adalah tanda bahaya. Bisa berarti progresi kurva atau herniasi disk. Wajib ke dokter segera.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> High-Impact Tanpa Pemanasan</div>
+        <div class="worsen-desc">Lompatan, burpee, box jump tanpa warm-up yang cukup bisa memberikan impak vertikal mendadak. Selalu pemanasan 10 menit dan hindari mendarat dengan lutut lurus.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Kurang Kalsium & Vit D</div>
+        <div class="worsen-desc">Tulang yang keropos (osteoporosis dini) membuat kurva lebih mudah progresif. Pastikan asupan kalsium 1000mg/hari dan paparan matahari pagi 15–20 menit untuk Vitamin D.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> HP / Gadget Cradling</div>
+        <div class="worsen-desc">"Text neck" — menunduk 60° ke HP menambah beban 27kg ke tulang leher. Ini menarik seluruh tulang belakang ke depan dan atas, memperburuk pola postur skoliotik.</div>
+      </div>
+      <div class="worsen-card">
+        <div class="worsen-title"><i class="fas fa-times-circle"></i> Latihan Hanya Satu Sisi</div>
+        <div class="worsen-desc">Latihan unilateral yang tidak seimbang (misal: selalu curl dengan tangan dominan saja, chest fly ke satu arah) memperparah asimetri otot yang sudah ada akibat kurva.</div>
+      </div>
+    </div>
+
+    <!-- DO & DON'T ORIGINAL -->
+    <div class="section-title" style="margin-top:1.5rem;font-size:0.88rem;"><i class="fas fa-list-ul"></i> RINGKASAN CEPAT — DO & DON'T</div>
+    <div class="skol-grid">
+      <div class="skol-card do">
+        <div class="skol-card-title"><i class="fas fa-check-circle"></i> YANG HARUS DILAKUKAN</div>
+        <ul class="skol-list">
+          <li><i class="fas fa-check icon-do"></i><span><strong>Core harian:</strong> Plank 3×45dtk, Dead Bug, Bird Dog setiap pagi.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Side stretch ke sisi cekung:</strong> 2×20dtk, pagi dan malam.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Renang 2–3x/minggu:</strong> Terbaik untuk skoliosis DAN bulking.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Tidur miring ke sisi cekung:</strong> Koreksi alami kurva saat tidur.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Postur duduk tegak:</strong> Set alarm tiap 45 menit untuk berdiri.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Schroth Breathing 10x:</strong> Pagi dan malam hari.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Fisioterapi:</strong> Minimal 1x/bulan untuk monitor kurva.</span></li>
+          <li><i class="fas fa-check icon-do"></i><span><strong>Matahari pagi 15 menit:</strong> Vitamin D untuk kesehatan tulang.</span></li>
+        </ul>
+      </div>
+      <div class="skol-card dont">
+        <div class="skol-card-title"><i class="fas fa-times-circle"></i> YANG TIDAK BOLEH</div>
+        <ul class="skol-list">
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Barbell Deadlift & Squat berat:</strong> Tekanan aksial berbahaya. Ganti dumbbell.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Tas bahu satu sisi:</strong> Selalu ransel dua tali untuk distribusi simetris.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Sit-up / crunch penuh:</strong> Ganti dengan Dead Bug atau Hollow Body Hold.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Tidur tengkurap:</strong> Memutar tulang belakang. Tidur miring atau telentang.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Olahraga rotasi satu arah berulang:</strong> Golf, bowling memperburuk asimetri.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Duduk bungkuk lama:</strong> Tekanan disk meningkat 40% saat bungkuk.</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>Abaikan nyeri asimetris:</strong> Nyeri satu sisi terus-menerus = ke dokter!</span></li>
+          <li><i class="fas fa-times icon-dont"></i><span><strong>HP dengan kepala menunduk lama:</strong> "Text neck" memperburuk postur.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box orange" style="margin-top:1.2rem;">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span><strong>Penting:</strong> Skoliosis ringan–sedang (Cobb &lt;40°) bisa dikontrol dengan latihan konsisten. Jika kurva &gt;40° atau nyeri makin parah, <strong>wajib konsultasi dokter ortopedi</strong> sebelum program fisik intensif. Program STIN + Bulking tetap bisa jalan dengan modifikasi tepat.</span>
+    </div>
+  </div>
+
+  <footer>
+    <i class="fas fa-skull"></i> "Shadow" — setiap hari makan lebih, latihan lebih, tumbuh lebih. <span style="color:var(--orange);">Shadow Bulk Protocol aktif.</span>
+  </footer>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer"></div>
+
+<script>
+  /* ══════════════════════════════════════════════
+     AUTH SYSTEM
+  ══════════════════════════════════════════════ */
+  const AUTH_KEY = 'SOLO_users';
+  const SESSION_KEY = 'SOLO_session';
+  let currentUser = null;
+
+  function getUsers() {
+    try { return JSON.parse(localStorage.getItem(AUTH_KEY)) || {}; }
+    catch(e) { return {}; }
+  }
+  function saveUsers(users) { localStorage.setItem(AUTH_KEY, JSON.stringify(users)); }
+
+  function switchAuthTab(tab) {
+    document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+    document.getElementById('registerForm').classList.toggle('active', tab === 'register');
+    document.getElementById('tabLoginBtn').classList.toggle('active', tab === 'login');
+    document.getElementById('tabRegisterBtn').classList.toggle('active', tab === 'register');
+    document.getElementById('loginError').classList.remove('show');
+    document.getElementById('registerError').classList.remove('show');
+  }
+
+  function togglePw(inputId, btn) {
+    const inp = document.getElementById(inputId);
+    const isHidden = inp.type === 'password';
+    inp.type = isHidden ? 'text' : 'password';
+    btn.innerHTML = isHidden ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+  }
+
+  function showAuthError(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+
+  function doRegister() {
+    const username = document.getElementById('regUsername').value.trim().toLowerCase();
+    const nickname = document.getElementById('regNickname').value.trim();
+    const pw1 = document.getElementById('regPassword').value;
+    const pw2 = document.getElementById('regPassword2').value;
+    const errId = 'registerError';
+
+    if (username.length < 3) return showAuthError(errId, '⚠ Username minimal 3 karakter!');
+    if (!/^[a-z0-9_]+$/.test(username)) return showAuthError(errId, '⚠ Username hanya huruf, angka, underscore!');
+    if (!nickname) return showAuthError(errId, '⚠ Nama panggilan wajib diisi!');
+    if (pw1.length < 6) return showAuthError(errId, '⚠ Password minimal 6 karakter!');
+    if (pw1 !== pw2) return showAuthError(errId, '⚠ Password tidak cocok!');
+
+    const users = getUsers();
+    if (users[username]) return showAuthError(errId, '⚠ Username sudah dipakai, coba lain!');
+
+    // Simple hash (XOR-based, client-side only)
+    users[username] = { nickname, pw: simpleHash(pw1), createdAt: Date.now() };
+    saveUsers(users);
+    document.getElementById('registerError').classList.remove('show');
+    showAuthError(errId, '');
+    showToast('🎉 Akun berhasil dibuat! Silakan login.', 'auth');
+    switchAuthTab('login');
+    document.getElementById('loginUsername').value = username;
+  }
+
+  function doLogin() {
+    const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const pw = document.getElementById('loginPassword').value;
+    const errId = 'loginError';
+
+    if (!username || !pw) return showAuthError(errId, '⚠ Username dan password wajib diisi!');
+
+    const users = getUsers();
+    if (!users[username]) return showAuthError(errId, '⚠ Username tidak ditemukan. Daftar dulu!');
+    if (users[username].pw !== simpleHash(pw)) return showAuthError(errId, '⚠ Password salah. Coba lagi!');
+
+    currentUser = { username, nickname: users[username].nickname };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(currentUser));
+    launchApp();
+  }
+
+  function simpleHash(str) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = (h * 0x01000193) >>> 0;
+    }
+    return h.toString(16);
+  }
+
+  function showLogoutConfirm() {
+    if (confirm(`👤 ${currentUser.nickname}\n\nKeluar dari SOLO System?`)) {
+      localStorage.removeItem(SESSION_KEY);
+      currentUser = null;
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('authOverlay').style.display = 'flex';
+      document.getElementById('loginUsername').value = '';
+      document.getElementById('loginPassword').value = '';
+      showToast('Berhasil logout. See you, Shadow Monarch.', 'auth');
+    }
+  }
+
+  function launchApp() {
+    document.getElementById('authOverlay').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    const nick = currentUser.nickname;
+    document.getElementById('userDisplayName').textContent = nick;
+    document.getElementById('userAvatar').textContent = nick.charAt(0).toUpperCase();
+    STORAGE_PREFIX = 'sl_' + currentUser.username + '_';
+    rebuildStorageKeys();
+    init();
+    showToast(`⚡ Selamat datang, ${nick}! fadhil!`, 'auth');
+  }
+
+  /* ══════════════════════════════════════════════
+     GAME SYSTEM
+  ══════════════════════════════════════════════ */
+  let STORAGE_PREFIX = 'sl_default_';
+  let STORAGE = {};
+
+  function rebuildStorageKeys() {
+    STORAGE = {
+      level: STORAGE_PREFIX+'level',
+      xp: STORAGE_PREFIX+'xp',
+      week: STORAGE_PREFIX+'week',
+      lastUpgrade: STORAGE_PREFIX+'last_upgrade_ts',
+      completedTasks: STORAGE_PREFIX+'completed_week',
+      completedBulkTasks: STORAGE_PREFIX+'completed_bulk_week',
+      stats: STORAGE_PREFIX+'stats',
+      attrPoints: STORAGE_PREFIX+'attr_points',
+      weightLog: STORAGE_PREFIX+'weight_log'
+    };
+  }
+
+  const defaultStats = {STR:10,AGI:10,INT:10,VIT:10};
+  let playerStats = {...defaultStats};
+  let availablePoints = 0;
+  let currentLevel = 1;
+  let currentXP = 0;
+  let currentWeek = 1;
+  let lastUpgradeTimestamp = Date.now();
+  let completedTaskIndices = [];
+  let completedBulkIndices = [];
+  let activeTasks = [];
+  let activeBulkTasks = [];
+  let weightLog = [];
+
+  const weekNumberSpan = document.getElementById('weekNumber');
+  const rankLabelSpan  = document.getElementById('rankLabel');
+  const playerLevelSpan= document.getElementById('playerLevel');
+  const currentXPSpan  = document.getElementById('currentXP');
+  const nextXPSpan     = document.getElementById('nextXP');
+  const xpFillDiv      = document.getElementById('xpFill');
+  const attributePointsSpan = document.getElementById('attributePoints');
+  const statsContainer = document.getElementById('statsContainer');
+  const tasksContainer = document.getElementById('tasksContainer');
+  const forceUpgradeBtn= document.getElementById('forceUpgradeBtn');
+  const nextUpgradeTimerSpan = document.getElementById('nextUpgradeTimer');
+  const bulkProgressBar= document.getElementById('bulkProgressBar');
+  const bulkPctSpan    = document.getElementById('bulkPct');
+  const currentWeightSpan = document.getElementById('currentWeight');
+  const bmiValueSpan   = document.getElementById('bmiValue');
+
+  function getRequiredXP(level){ return Math.floor(100+(level-1)*50); }
+  function getRank(level){
+    if(level<=5)  return 'E-Rank';
+    if(level<=10) return 'D-Rank';
+    if(level<=15) return 'C-Rank';
+    if(level<=20) return 'B-Rank';
+    if(level<=25) return 'A-Rank';
+    return 'S-Rank ⚡';
+  }
+
+  function handleLevelUp(){
+    let leveled = false;
+    while(currentXP>=getRequiredXP(currentLevel)&&currentLevel<99){
+      currentXP-=getRequiredXP(currentLevel);
+      currentLevel++;
+      availablePoints+=3;
+      leveled=true;
+    }
+    if(currentXP<0)currentXP=0;
+    if(leveled){ showToast(`⚡ LEVEL UP! Lv.${currentLevel} — +3 Atribut!`,'level'); saveGameToLocal(); renderStatsAndUI(); }
+    updateLevelUI();
+  }
+
+  function addXP(amount){ currentXP+=amount; handleLevelUp(); updateLevelUI(); saveGameToLocal(); }
+
+  function updateLevelUI(){
+    const req=getRequiredXP(currentLevel);
+    currentXPSpan.innerText=currentXP;
+    nextXPSpan.innerText=req;
+    xpFillDiv.style.width=`${Math.min(100,(currentXP/req)*100)}%`;
+    playerLevelSpan.innerText=`Lv. ${currentLevel}`;
+    rankLabelSpan.innerText=getRank(currentLevel);
+  }
+
+  function renderStatsAndUI(){
+    statsContainer.innerHTML='';
+    const icons={STR:'fist-raised',AGI:'shoe-prints',INT:'brain',VIT:'heartbeat'};
+    for(const [stat,val] of Object.entries(playerStats)){
+      const d=document.createElement('div');
+      d.className='attr-item';
+      d.innerHTML=`<span><i class="fas fa-${icons[stat]||'star'}"></i> ${stat}</span><strong>${val}</strong><button class="btn-stat" data-stat="${stat}">+</button>`;
+      statsContainer.appendChild(d);
+    }
+    attributePointsSpan.innerText=availablePoints;
+    document.querySelectorAll('.btn-stat').forEach(btn=>{
+      btn.removeEventListener('click',statHandler);
+      btn.addEventListener('click',statHandler);
+    });
+  }
+
+  function statHandler(e){
+    e.stopPropagation();
+    const s=e.currentTarget.getAttribute('data-stat');
+    if(availablePoints<=0){ showToast('Tidak ada poin atribut! Naik level dulu.','xp'); return; }
+    playerStats[s]+=1; availablePoints-=1;
+    saveGameToLocal(); renderStatsAndUI();
+  }
+
+  function generateTasksByWeek(w){
+    w=Math.max(1,w);
+    const physReps=30+(w-1)*8, situps=40+(w-1)*10, burpees=20+(w-1)*4;
+    const studyH=1+Math.floor((w-1)/1.5);
+    const medMins=20+(w-1)*3;
+    const engQ=30+(w-1)*8;
+    const news=2+Math.floor((w-1)/2);
+    const base=55+(w-1)*7;
+    return [
+      {id:0,title:"⚔️ Shadow Stamina",desc:`${physReps} push-up, ${situps} sit-up, ${burpees} burpee. Intensitas naik tiap minggu!`,xp:base+10},
+      {id:1,title:"📚 Tes Kompetensi STIN",desc:`Belajar TKD, Psikotes, Wawasan Kebangsaan selama ${studyH} jam.`,xp:base+5},
+      {id:2,title:"🧠 Mental Monarch",desc:`Meditasi & visualisasi ${medMins} menit + jurnal refleksi harian.`,xp:base+8},
+      {id:3,title:"🌍 English & Intelijen",desc:`${engQ} soal TOEFL/IELTS practice + ringkasan berita geopolitik.`,xp:base+12},
+      {id:4,title:"📰 Analisis Situasi",desc:`Baca ${news} artikel intelijen & buat analisis 3 poin.`,xp:base+15},
+    ];
+  }
+
+  function generateBulkTasksByWeek(w){
+    w=Math.max(1,w);
+    const cal=3000+(w-1)*50;
+    const sets=3+(w>4?1:0);
+    const base=60+(w-1)*8;
+    return [
+      {id:0,title:"🍖 Surplus Kalori Harian",desc:`Makan minimal ${cal} kal hari ini. Catat semua makanan. Prioritaskan protein!`,xp:base+20,bulking:true},
+      {id:1,title:"💪 Hypertrophy Session",desc:`Selesaikan sesi gym hari ini sesuai split (${sets}×10–12 rep per exercise). Catat beban!`,xp:base+25,bulking:true},
+      {id:2,title:"🥤 Protein Target",desc:`Konsumsi minimal ${w<3?120:140}g protein hari ini. Hitung dari telur, ayam, susu, tempe.`,xp:base+15,bulking:true},
+      {id:3,title:"😴 Quality Sleep",desc:`Tidur minimal 7 jam malam ini. Growth Hormone maks saat tidur nyenyak!`,xp:base+10,bulking:true},
+      {id:4,title:"⚖️ Timbang Badan",desc:`Timbang berat badan pagi ini (setelah BAK, sebelum makan). Catat di Weight Tracker!`,xp:base+5,bulking:true},
+    ];
+  }
+
+  function renderTasks(){
+    if(!activeTasks.length) activeTasks=generateTasksByWeek(currentWeek);
+    if(!activeBulkTasks.length) activeBulkTasks=generateBulkTasksByWeek(currentWeek);
+    const allTasks=[
+      ...activeTasks.map((t,i)=>({...t,globalIdx:i,type:'stin'})),
+      ...activeBulkTasks.map((t,i)=>({...t,globalIdx:i,type:'bulk'}))
+    ];
+    tasksContainer.innerHTML='';
+    allTasks.forEach(task=>{
+      const isCompleted = task.type==='stin' ? completedTaskIndices.includes(task.globalIdx) : completedBulkIndices.includes(task.globalIdx);
+      const card=document.createElement('div');
+      card.className=`task-card ${task.bulking?'bulking-card':''} ${isCompleted?'completed':''}`;
+      card.innerHTML=`
+        <div class="task-title">
+          <span>${task.title}</span>
+          ${isCompleted?'<i class="fas fa-check-circle" style="color:#34d399;flex-shrink:0;"></i>':'<i class="fas fa-hourglass-half" style="color:#fbbf24;flex-shrink:0;"></i>'}
+        </div>
+        <div class="task-desc">${task.desc}</div>
+        <div class="task-footer">
+          <span class="xp-reward"><i class="fas fa-gem"></i> +${task.xp} XP</span>
+          <button class="complete-btn ${task.bulking?'bulking':''}" data-idx="${task.globalIdx}" data-type="${task.type}" ${isCompleted?'disabled':''}>
+            ${isCompleted?'✅ Selesai':'Ambil Quest'}
+          </button>
+        </div>`;
+      tasksContainer.appendChild(card);
+    });
+    document.querySelectorAll('.complete-btn').forEach(btn=>{
+      if(!btn.disabled){ btn.removeEventListener('click',taskCompleteHandler); btn.addEventListener('click',taskCompleteHandler); }
+    });
+  }
+
+  function taskCompleteHandler(e){
+    const btn=e.currentTarget;
+    const idx=parseInt(btn.getAttribute('data-idx'));
+    const type=btn.getAttribute('data-type');
+    if(type==='stin'){
+      if(completedTaskIndices.includes(idx)) return;
+      const task=activeTasks[idx]; if(!task) return;
+      addXP(task.xp); completedTaskIndices.push(idx);
+      showToast(`✅ Quest selesai! +${task.xp} XP`,'xp');
+    } else {
+      if(completedBulkIndices.includes(idx)) return;
+      const task=activeBulkTasks[idx]; if(!task) return;
+      addXP(task.xp); completedBulkIndices.push(idx);
+      showToast(`🍖 Bulk Quest selesai! +${task.xp} XP — Mass growing!`,'bulk');
+    }
+    saveGameToLocal(); renderTasks();
+  }
+
+  function saveWeight(){
+    const input=document.getElementById('weightInput');
+    const val=parseFloat(input.value);
+    if(isNaN(val)||val<30||val>200){ showToast('Masukkan berat yang valid (30–200 kg)','xp'); return; }
+    const entry={ weight:val, date:new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}) };
+    weightLog.push(entry);
+    if(weightLog.length>30) weightLog=weightLog.slice(-30);
+    saveGameToLocal(); renderWeightLog(); updateBodyStats(val);
+    input.value='';
+    showToast(`⚖️ Berat ${val} kg dicatat!`,'bulk');
+  }
+
+  function renderWeightLog(){
+    const el=document.getElementById('weightEntries');
+    if(!el) return;
+    if(!weightLog.length){
+      el.innerHTML='<div style="text-align:center;color:var(--text-dim);font-size:0.8rem;padding:1rem;">Belum ada data. Catat berat badan pertamamu!</div>';
+      return;
+    }
+    el.innerHTML='';
+    [...weightLog].reverse().slice(0,10).forEach((entry,i,arr)=>{
+      const prev=arr[i+1];
+      let diffHTML='';
+      if(prev){ const diff=(entry.weight-prev.weight).toFixed(1); const cls=diff>0?'up':diff<0?'down':'same'; const sign=diff>0?'+':''; diffHTML=`<span class="we-diff ${cls}">${sign}${diff}kg</span>`; }
+      const div=document.createElement('div');
+      div.className='weight-entry';
+      div.innerHTML=`<span class="we-date">${entry.date}</span><span class="we-val">${entry.weight} kg</span>${diffHTML}`;
+      el.appendChild(div);
+    });
+  }
+
+  function updateBodyStats(weight){
+    const height=176; const bmi=(weight/(height/100)**2).toFixed(1);
+    if(currentWeightSpan) currentWeightSpan.textContent=`${weight.toFixed(1)} kg`;
+    if(bmiValueSpan) bmiValueSpan.textContent=bmi;
+    const bmiF=parseFloat(bmi);
+    if(bmiValueSpan) bmiValueSpan.style.color=bmiF<18.5?'var(--orange)':bmiF<25?'var(--green)':'var(--red)';
+    if(currentWeightSpan) currentWeightSpan.style.color=weight<60?'var(--orange)':weight<68?'var(--green)':'var(--yellow)';
+    const start=57, target=65;
+    const pct=Math.min(100,Math.max(0,((weight-start)/(target-start))*100));
+    if(bulkProgressBar) bulkProgressBar.style.width=pct+'%';
+    if(bulkPctSpan) bulkPctSpan.textContent=pct.toFixed(0)+'%';
+  }
+
+  function performWeeklyUpgrade(){
+    currentWeek++;
+    completedTaskIndices=[]; completedBulkIndices=[];
+    activeTasks=generateTasksByWeek(currentWeek);
+    activeBulkTasks=generateBulkTasksByWeek(currentWeek);
+    lastUpgradeTimestamp=Date.now();
+    saveGameToLocal();
+    weekNumberSpan.innerText=currentWeek;
+    renderTasks(); updateCountdownDisplay();
+    showToast(`⚡ WEEK ${currentWeek} — Quest diupgrade! EXP lebih besar!`,'level');
+  }
+
+  function checkAutoUpgrade(){
+    if(Date.now()-lastUpgradeTimestamp>=7*24*3600000){ performWeeklyUpgrade(); return true; }
+    return false;
+  }
+
+  let timerInterval;
+  function updateCountdownDisplay(){
+    if(!nextUpgradeTimerSpan) return;
+    const next=lastUpgradeTimestamp+(7*24*3600000);
+    const diff=next-Date.now();
+    if(diff<=0){ nextUpgradeTimerSpan.innerHTML=`<i class="fas fa-arrow-up"></i> Upgrade siap!`; return; }
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    nextUpgradeTimerSpan.innerHTML=`<i class="far fa-clock"></i> Upgrade: ${d}d ${h}h ${m}m`;
+  }
+
+  function loadGameData(){
+    const s=key=>localStorage.getItem(key);
+    if(s(STORAGE.level)!==null) currentLevel=parseInt(s(STORAGE.level));
+    else currentLevel=1;
+    if(s(STORAGE.xp)!==null) currentXP=parseInt(s(STORAGE.xp));
+    else currentXP=0;
+    if(s(STORAGE.week)!==null) currentWeek=parseInt(s(STORAGE.week));
+    else currentWeek=1;
+    if(s(STORAGE.lastUpgrade)!==null) lastUpgradeTimestamp=parseInt(s(STORAGE.lastUpgrade));
+    else lastUpgradeTimestamp=Date.now();
+    if(s(STORAGE.completedTasks)!==null) completedTaskIndices=JSON.parse(s(STORAGE.completedTasks));
+    else completedTaskIndices=[];
+    if(s(STORAGE.completedBulkTasks)!==null) completedBulkIndices=JSON.parse(s(STORAGE.completedBulkTasks));
+    else completedBulkIndices=[];
+    if(s(STORAGE.stats)!==null){ try{ playerStats=JSON.parse(s(STORAGE.stats)); }catch(e){ playerStats={...defaultStats}; } }
+    else playerStats={...defaultStats};
+    if(s(STORAGE.attrPoints)!==null) availablePoints=parseInt(s(STORAGE.attrPoints));
+    else availablePoints=0;
+    if(s(STORAGE.weightLog)!==null){ try{ weightLog=JSON.parse(s(STORAGE.weightLog)); }catch(e){ weightLog=[]; } }
+    else weightLog=[];
+    ['STR','AGI','INT','VIT'].forEach(st=>{ if(playerStats[st]===undefined) playerStats[st]=10; });
+    activeTasks=generateTasksByWeek(currentWeek);
+    activeBulkTasks=generateBulkTasksByWeek(currentWeek);
+  }
+
+  function saveGameToLocal(){
+    const s=(k,v)=>localStorage.setItem(k,v);
+    s(STORAGE.level,currentLevel); s(STORAGE.xp,currentXP);
+    s(STORAGE.week,currentWeek); s(STORAGE.lastUpgrade,lastUpgradeTimestamp);
+    s(STORAGE.completedTasks,JSON.stringify(completedTaskIndices));
+    s(STORAGE.completedBulkTasks,JSON.stringify(completedBulkIndices));
+    s(STORAGE.stats,JSON.stringify(playerStats));
+    s(STORAGE.attrPoints,availablePoints);
+    s(STORAGE.weightLog,JSON.stringify(weightLog));
+  }
+
+  function showToast(msg, type='xp'){
+    const t=document.createElement('div');
+    t.className=`toast ${type}`;
+    t.innerText=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),2800);
+  }
+
+  function switchTab(tabId, btn){
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    if(btn) btn.classList.add('active');
+  }
+
+  function toggleProto(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+    body.classList.toggle('open');
+    if(icon){ icon.classList.toggle('fa-chevron-down'); icon.classList.toggle('fa-chevron-up'); }
+  }
+
+  function refreshUI(){
+    weekNumberSpan.innerText=currentWeek;
+    updateLevelUI();
+    renderStatsAndUI();
+    renderTasks();
+    renderWeightLog();
+    updateCountdownDisplay();
+    if(weightLog.length) updateBodyStats(weightLog[weightLog.length-1].weight);
+    else updateBodyStats(57);
+  }
+
+  function init(){
+    loadGameData();
+    const upgraded=checkAutoUpgrade();
+    if(upgraded) saveGameToLocal();
+    activeTasks=generateTasksByWeek(currentWeek);
+    activeBulkTasks=generateBulkTasksByWeek(currentWeek);
+    refreshUI();
+    if(timerInterval) clearInterval(timerInterval);
+    timerInterval=setInterval(()=>{
+      updateCountdownDisplay();
+      if(Date.now()-lastUpgradeTimestamp>=7*24*3600000){ checkAutoUpgrade(); refreshUI(); saveGameToLocal(); }
+    },60000);
+    forceUpgradeBtn.addEventListener('click',()=>{
+      if(confirm("⚠️ Maju ke minggu depan? Quest diupgrade lebih sulit, XP & level tetap.")){
+        performWeeklyUpgrade(); saveGameToLocal(); refreshUI();
+      }
+    });
+  }
+
+  /* ── Auto-login check on page load ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedSession = localStorage.getItem(SESSION_KEY);
+    if (savedSession) {
+      try {
+        const sess = JSON.parse(savedSession);
+        const users = getUsers();
+        if (users[sess.username]) {
+          currentUser = sess;
+          launchApp();
+          return;
+        }
+      } catch(e) {}
+    }
+    // Show login hint
+    const users = getUsers();
+    const userList = Object.keys(users);
+    const hint = document.getElementById('loginUserHint');
+    if (hint && userList.length > 0) {
+      hint.textContent = `Akun terdaftar: ${userList.join(', ')}`;
+    }
+  });
+
+  // Enter key support
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const loginActive = document.getElementById('loginForm').classList.contains('active');
+      if (loginActive) doLogin();
+      else doRegister();
+    }
+  });
+</script>
+</body>
+</html>
